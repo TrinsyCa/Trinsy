@@ -2,6 +2,14 @@
     "name": "trinsyca/trinsy",
     "description": "Trinsyca CLI Plugin for Composer",
     "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Trinsyca",
+            "email": "omer@trinsyca.com"
+        }
+    ],
+    "version": "1.0.1",
     "require": {
         "composer-plugin-api": "^2.0"
     },
