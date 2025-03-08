@@ -9,7 +9,7 @@
             "email": "omer@trinsyca.com"
         }
     ],
-    "version": "1.0.1",
+    "version": "1.0.3",
     "require": {
         "composer-plugin-api": "^2.0"
     },
