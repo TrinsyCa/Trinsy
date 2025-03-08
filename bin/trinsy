@@ -1,0 +1,23 @@
+#!/bin/bash
+
+COMMAND=$1
+
+case $COMMAND in
+    docker-frontend)
+        php vendor/trinsyca/docker/cmd/docker-frontend/setup-docker.php
+        ;;
+    docker-backend)
+        php vendor/trinsyca/docker/cmd/docker-backend/setup-docker.php
+        ;;
+    docker-fullstack)
+        php vendor/trinsyca/docker/cmd/docker-fullstack/setup-docker.php
+        ;;
+    docker-remove)
+        php vendor/trinsyca/docker/cmd/remove-docker.php
+        ;;
+    *)
+        echo "Unknown command: $COMMAND"
+        echo "Usage: trinsy [docker-frontend|docker-backend|docker-fullstack|docker-remove]"
+        exit 1
+        ;;
+esac
