@@ -30,9 +30,25 @@ composer require trinsyca/trinsy
 
 **This will install the plugin and register the necessary Composer scripts in your project.**
 
-## Available Commands ⚙️
+```bash
+Do you trust "trinsyca/trinsy" to execute code and wish to enable it now? (writes "allow-plugins" to composer.json) [y,n,d,?]
+```
+
+- **Please type ``y`` to allow and proceed.**<br>
+
+**This will allow the use of ``composer trinsy`` commands**
+
+# Available Commands ⚙️
 
 **Once installed, use the following Composer commands to manage Docker configurations:**
+
+## 🐳 Docker Commands
+
+**To integrate this project into your own, simply run the following command:**
+```bash
+composer require trinsyca/docker
+```
+**This will add the necessary Docker files and configurations to your project.**
 
 ### ✅ Setup Frontend Docker:
 
@@ -77,8 +93,6 @@ composer require trinsyca/trinsy
 ```bash
 composer dump-autoload
 ```
-
-**Before removing Docker files, you will be prompted with a confirmation.**
 
 ## License 📜
 
