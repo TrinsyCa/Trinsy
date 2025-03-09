@@ -21,7 +21,7 @@ class Plugin implements PluginInterface, Capable
         $io->write("<info>✅ Trinsy Plugin activated!</info>");
 
         // trinsyca/docker yüklü mü kontrol et
-        if (!$this->isPackageInstalled('trinsyca/docker')) {
+        if (!$this->isPackageInstalled(__DIR__ . 'vendor/trinsyca/docker')) {
             $io->write("<comment>⚠️ trinsyca/docker is not installed. Installing now...</comment>");
             $this->runComposerCommand('require trinsyca/docker');
         }
