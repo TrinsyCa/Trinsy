@@ -21,7 +21,7 @@ class Plugin implements PluginInterface, Capable
         $io->write("<info>✅ Trinsy Plugin activated!</info>");
 
         // trinsyca/docker yüklü mü kontrol et
-        if (!$this->isPackageInstalled(__DIR__ . 'vendor/trinsyca/docker')) {
+        if (!$this->isPackageInstalled('trinsyca/docker')) {
             $io->write("<comment>⚠️ trinsyca/docker is not installed. Installing now...</comment>");
             $this->runComposerCommand('require trinsyca/docker');
         }
@@ -44,15 +44,25 @@ class Plugin implements PluginInterface, Capable
         ];
     }
 
-    private function isPackageInstalled($packageName)
-    {
-        $installedRepo = $this->composer->getRepositoryManager()->getLocalRepository();
-        return $installedRepo->findPackage($packageName, '*') !== null;
+    private function isPackageInstalled(string $packageName): bool
+{
+    $installedPackages = $this->composer->getRepositoryManager()->getLocalRepository()->getPackages();
+    
+    foreach ($installedPackages as $package) {
+        if ($package->getName() === $packageName) {
+            return true; // Paket zaten yüklü
+        }
     }
+    return false; // Paket eksik
+}
 
-    private function runComposerCommand($command)
+    private function runComposerCommand(string $command)
     {
-        $command = 'composer ' . $command;
-        passthru($command);
+        $process = new \Symfony\Component\Process\Process(['composer', $command]);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException("Error executing Composer command: $command");
+        }
     }
 }
