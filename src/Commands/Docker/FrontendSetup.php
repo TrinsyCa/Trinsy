@@ -1,12 +1,12 @@
 <?php
 
-namespace Trinsyca\Trinsy\Commands;
+namespace Trinsyca\Trinsy\Commands\Docker;
 
 use Composer\Command\BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class FrontendCommand extends BaseCommand
+class FrontendSetup extends BaseCommand
 {
     protected function configure()
     {

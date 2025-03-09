@@ -7,12 +7,11 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Plugin\Capable;
 use Composer\Plugin\Capability\CommandProvider;
-use Symfony\Component\Process\Process;
 
 class Plugin implements PluginInterface, Capable
 {
-    private Composer $composer;
-    private IOInterface $io;
+    private $composer;
+    private $io;
 
     public function activate(Composer $composer, IOInterface $io)
     {
@@ -20,6 +19,12 @@ class Plugin implements PluginInterface, Capable
         $this->io = $io;
 
         $io->write("<info>✅ Trinsy Plugin activated!</info>");
+
+        // trinsyca/docker yüklü mü kontrol et
+        if (!$this->isPackageInstalled('trinsyca/docker')) {
+            $io->write("\n<comment>⚠️ trinsyca/docker is not installed.</comment>");
+            $io->write("<comment>⌨️ Use this command to install: </comment><error> composer require trinsyca/docker </error>\n");
+        }
     }
 
     public function deactivate(Composer $composer, IOInterface $io)
@@ -39,35 +44,21 @@ class Plugin implements PluginInterface, Capable
         ];
     }
 
-    // Eğer trinsyca/docker yüklü değilse yükleyip sonra devam et
-    public function ensureDockerPackageInstalled(string $command)
-    {
-        if (!$this->isPackageInstalled('trinsyca/docker')) {
-            $this->io->write("<comment>⚠️ trinsyca/docker is not installed. Installing now...</comment>");
-            $this->runComposerCommand('require trinsyca/docker');
-        }
-
-        // Paket yüklendikten sonra komutu çalıştır
-        $this->runComposerCommand($command);
-    }
-
-    // Composer ile paket yüklü mü kontrol et
     private function isPackageInstalled(string $packageName): bool
-    {
-        $installedPackages = $this->composer->getRepositoryManager()->getLocalRepository()->getPackages();
-        
-        foreach ($installedPackages as $package) {
-            if ($package->getName() === $packageName) {
-                return true;
-            }
+{
+    $installedPackages = $this->composer->getRepositoryManager()->getLocalRepository()->getPackages();
+    
+    foreach ($installedPackages as $package) {
+        if ($package->getName() === $packageName) {
+            return true; // Paket zaten yüklü
         }
-        return false;
     }
+    return false; // Paket eksik
+}
 
-    // Composer komutu çalıştır
     private function runComposerCommand(string $command)
     {
-        $process = new Process(['composer', $command]);
+        $process = new \Symfony\Component\Process\Process(['composer', $command]);
         $process->run();
 
         if (!$process->isSuccessful()) {
