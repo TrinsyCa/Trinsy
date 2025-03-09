@@ -42,7 +42,7 @@ Do you trust "trinsyca/trinsy" to execute code and wish to enable it now? (write
 
 **Once installed, use the following Composer commands to manage Docker configurations:**
 
-## 🐳 Docker Commands
+## [🐳 Docker Setup](https://github.com/TrinsyCa/Docker)
 
 **To integrate this project into your own, simply run the following command:**
 ```bash
