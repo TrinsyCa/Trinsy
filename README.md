@@ -1,4 +1,4 @@
-# <div align="center">🚀 TrinsyCa Composer Plugin 🚀</div>
+# <div align="center">🚀 Trinsy Composer Plugin 🚀</div>
 
 <div align="center">
 
