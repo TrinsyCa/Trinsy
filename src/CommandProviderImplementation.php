@@ -13,6 +13,7 @@ class CommandProviderImplementation implements CommandProvider
             new DockerCmd\FrontendSetup(),
             new DockerCmd\BackendSetup(),
             new DockerCmd\FullstackSetup(),
+            new DockerCmd\RemoveSetup(),
         ];
     }
 }
